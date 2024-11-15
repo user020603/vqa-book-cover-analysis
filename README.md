@@ -32,12 +32,13 @@ This project is a web application that allows users to analyze book covers using
 ## Usage
 
 1. **Run the Flask server:**
-    Open [`VQAFlaskServer.ipynb`](VQAFlaskServer.ipynb) in Jupyter Notebook or Jupyter Lab and run all cells to start the Flask server.
+    Open [`VQAFlaskServer.ipynb`](VQAFlaskServer.ipynb) in Jupyter Notebook or Google Colab and run all cells to start the Flask server.
+    Or use the provided Google Colab link: [Run Flask Server on Colab](https://colab.research.google.com/drive/1lHWJptIK0ZcefrjXDOOesVO2YKuQdLvC?usp=sharing).
 
-2. **Open the web application:**
+3. **Open the web application:**
     Open [`index.html`](index.html) in a web browser to access the user interface for uploading book cover images.
 
-3. **Analyze a book cover:**
+4. **Analyze a book cover:**
     - Click on the "Choose File" button to upload a book cover image.
     - Click on the "Analyze" button to send the image to the server for analysis.
     - The results (title, author, and publisher) will be displayed on the web page.
