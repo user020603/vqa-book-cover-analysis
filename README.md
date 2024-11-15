@@ -1,6 +1,6 @@
 # Phân Tích Bìa Sách
 
-This project is a web application that allows users to analyze book covers using a Flask server and a machine learning model. The application provides a user interface to upload book cover images and returns the title, author, and publisher of the book.
+This project is a web application that allows users to analyze book covers using a Flask server and a Vision Question Answering model. The application provides a user interface to upload book cover images and returns the title, author, and publisher of the book.
 
 ## Table of Contents
 
