@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân Tích Bìa Sách</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        h1 {
+            color: #4a90e2;
+            margin-bottom: 1rem;
+        }
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+        #book-cover {
+            margin: 1rem 0;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #4a90e2;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #357ab8;
+        }
+        #result {
+            margin-top: 1.5rem;
+            text-align: left;
+            display: none;
+        }
+        #result p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        /* Spinner Style */
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4a90e2;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        /* Keyframes for spinner animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Progress Bar Style */
+        #progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 20px;
+            height: 20px;
+        }
+        #progress-bar > div {
+            height: 100%;
+            background-color: #4a90e2;
+            width: 0%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Phân Tích Bìa Sách</h1>
+        <input type="file" id="book-cover" accept="image/*">
+        <button onclick="analyzeBookCover()">Phân Tích</button>
+        
+        <!-- Progress Bar -->
+        <div id="progress-bar">
+            <div></div>
+        </div>
+
+        <!-- Spinner -->
+        <div id="spinner" class="spinner" style="display: none;"></div>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function analyzeBookCover() {
+            const fileInput = document.getElementById('book-cover');
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Lấy đối tượng progress bar và spinner
+            const progressBar = document.getElementById('progress-bar');
+            const spinner = document.getElementById('spinner');
+            const resultDiv = document.getElementById('result');
+            const apiUrl = "https://871a-34-168-22-90.ngrok-free.app/analyze-book-cover-v4";
+
+            // Hiện spinner và ẩn kết quả cũ
+            resultDiv.style.display = 'none';
+            spinner.style.display = 'block';
+            progressBar.style.display = 'block';
+            progressBar.querySelector('div').style.width = '0%';
+
+            try {
+                // Giả lập quá trình phân tích để minh họa thanh tiến trình
+                let progress = 0;
+                const interval = setInterval(() => {
+                    if (progress < 90) {
+                        progress += 10;
+                        progressBar.querySelector('div').style.width = progress + '%';
+                    }
+                }, 300);
+
+                // Gửi request đến API
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                // Chờ phản hồi từ API
+                const data = await response.json();
+                
+                // Dừng thanh tiến trình và ẩn spinner
+                clearInterval(interval);
+                progressBar.querySelector('div').style.width = '100%';
+                spinner.style.display = 'none';
+
+                // Hiển thị kết quả
+                resultDiv.innerHTML = `
+                    <p><strong>Tiêu đề:</strong> ${data.title}</p>
+                    <p><strong>Tác giả:</strong> ${data.author}</p>
+                    <p><strong>Nhà xuất bản:</strong> ${data.publisher}</p>
+                `;
+                resultDiv.style.display = 'block';
+
+            } catch (error) {
+                console.error("Error fetching data from API:", error);
+                resultDiv.innerHTML = "<p>Đã có lỗi xảy ra khi gọi API</p>";
+                resultDiv.style.display = 'block';
+                spinner.style.display = 'none';
+                progressBar.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
