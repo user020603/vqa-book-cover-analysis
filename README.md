@@ -78,6 +78,9 @@ Analyzes a book cover image and returns the title, author, and publisher.
     }
     ```
 
+### UI
+![image](https://github.com/user-attachments/assets/72ab0826-ce19-4290-9d37-152cba890d8b)
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
