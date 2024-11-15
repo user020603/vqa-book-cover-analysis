@@ -33,6 +33,7 @@ This project is a web application that allows users to analyze book covers using
 
 1. **Run the Flask server:**
     Open [`VQAFlaskServer.ipynb`](VQAFlaskServer.ipynb) in Jupyter Notebook or Google Colab and run all cells to start the Flask server.
+   
     Or use the provided Google Colab link: [Run Flask Server on Colab](https://colab.research.google.com/drive/1lHWJptIK0ZcefrjXDOOesVO2YKuQdLvC?usp=sharing).
 
 3. **Open the web application:**
