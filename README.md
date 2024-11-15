@@ -79,7 +79,7 @@ Analyzes a book cover image and returns the title, author, and publisher.
     ```
 
 ### UI
-![image](https://github.com/user-attachments/assets/72ab0826-ce19-4290-9d37-152cba890d8b)
+![image](https://github.com/user-attachments/assets/de952bef-6f46-40c2-9f3e-a0f7eb209d20)
 
 ## License
 
